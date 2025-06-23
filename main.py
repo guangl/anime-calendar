@@ -6,9 +6,9 @@ calendar = Calendar()
 # 创建一个事件
 event = Event()
 event.name = "会议：项目讨论"
-event.begin = "2025-06-25 10:00:00"
-event.end = "2025-06-25 11:00:00"
-event.location = "会议室A"
+event.begin = "2025-06-26 10:00:00"
+event.end = "2025-06-26 11:00:00"
+event.location = "会议室B"
 event.description = "项目阶段性讨论会议"
 
 # 添加事件到日历
