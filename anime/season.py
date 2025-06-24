@@ -46,26 +46,14 @@ def deal_with_anime_data(anime_list: list) -> list:
             timezone = anime.get('broadcast', {}).get('timezone')
             episodes = anime.get('episodes')
 
-            if all(item.get('mal_id') != mal_id for item in dataset):
-                anime = {
-                    'mal_id': mal_id,
-                    'title': title,
-                    'from_date': from_date,
-                    'to_date': to_date,
-                    'season': season,
-                    'year': year,
-                    'duration': duration,
-                    'duration_unit': duration_unit,
-                    'day': day,
-                    'time': time,
-                    'timezone': timezone,
-                    'episodes': episodes
-                }
-
-                dataset.append(anime)
+            if all(item[0] != mal_id for item in dataset):
+                dataset.append((
+                    mal_id, title, from_date, to_date,
+                    season, year, duration, duration_unit,
+                    day, time, timezone, episodes
+                ))
         except Exception as e:
             print(f'has error: {e}, the anime is {anime}')
-            raise
-            # continue
+            continue
 
     return dataset
