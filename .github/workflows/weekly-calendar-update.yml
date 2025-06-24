@@ -19,7 +19,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
-          python-version: '3.x'
+          python-version: '3.13'
           cache: 'pip'  # UV 支持使用 pip 的缓存目录
 
       - name: Install uv
@@ -28,7 +28,7 @@ jobs:
           curl -LsSf https://astral.sh/uv/install.sh | sh
 
       - name: Install dependencies
-        run: uv pip sync pyproject.toml
+        run: uv pip sync pyproject.toml --system
 
       - name: Run calendar generator
         run: python main.py
