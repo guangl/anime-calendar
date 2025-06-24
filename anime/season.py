@@ -1,7 +1,7 @@
 from utils.request_with_retry import request_with_retry
 
 
-def get_season_now(filter: str = 'tv', continuing: bool = True) -> list:
+def get_season_now(filter: str = 'tv', continuing: bool = False) -> list:
     anime_list = []
 
     page = 1
