@@ -26,7 +26,7 @@ def deal_with_anime_data(anime_list: list) -> list:
     for anime in anime_list:
         try:
             mal_id = anime.get('mal_id')
-            title = anime.get('title')
+            title = anime.get('title_japanese') if anime.get('title_japanese') else anime.get('title')
             from_date = anime.get('aired', {}).get('from')
             to_date = anime.get('aired', {}).get('to')
             season = anime.get('season')

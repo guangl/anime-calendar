@@ -1,9 +1,5 @@
 import sqlite3
-import sys
-from datetime import datetime
 from pathlib import Path
-
-from dateutil.relativedelta import relativedelta
 
 db_path = (Path() / 'dist' / 'calendar.db').resolve()
 
