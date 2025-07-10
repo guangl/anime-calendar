@@ -1,3 +1,4 @@
+from dotenv import load_dotenv
 from ics import Calendar
 
 from anime.calendar import generate_anime_calendar_for_one_year
@@ -17,5 +18,7 @@ def generate_calendar() -> None:
 
 
 if __name__ == '__main__':
+    load_dotenv()
+
     init_database()
     generate_calendar()

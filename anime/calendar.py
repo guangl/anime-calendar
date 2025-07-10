@@ -82,51 +82,22 @@ def convert_to_timezone_time(datetime_str: str, timezone: str = 'Asia/Tokyo') ->
 
 
 def generate_anime_calendar_for_one_year() -> Calendar:
-    today = datetime.today()
-    dest_timezone = 'Asia/Shanghai'
-    weekday_map = {
-        'Sundays': 0,
-        'Mondays': 1,
-        'Tuesdays': 2,
-        'Wednesdays': 3,
-        'Thursdays': 4,
-        'Fridays': 5,
-        'Saturdays': 6,
-    }
-
     anime_now_season_list = get_season_now()
     dataset = deal_with_anime_data(anime_now_season_list)
-    insert_season_anime(dataset)
-    anime_year_list = query_year_anime(today.year)
 
     # 创建一个日历对象
     calendar = Calendar()
 
-    for anime in anime_year_list:
-        title = anime['title']
-        from_date = anime['from_date']
-        duration = anime['duration']
-        duration_unit = anime['duration_unit']
-        day = anime['day']
-        time = anime['time']
-        from_timezone = anime['timezone']
-        episodes = anime['episodes']
-
-        tokyo_time = f'{from_date.split('T')[0]} {time}:00'
-        chinese_time = convert_to_timezone_time(tokyo_time).astimezone(ZoneInfo(dest_timezone))
-
-        target_weekday = weekday_map.get(day)
-        future_weekdays = get_future_weekdays(episodes, target_weekday, chinese_time)
-
-        for (i, weekday) in enumerate(future_weekdays):
-            start_time = weekday
-            end_time = weekday + timedelta(minutes=duration) if duration_unit == 'min' else weekday + timedelta(seconds=duration)
-
-            event = Event()
-            event.name = title
-            event.begin = start_time.strftime("%Y-%m-%d %H:%M:%S")
-            event.end = end_time.strftime("%Y-%m-%d %H:%M:%S")
-
-            calendar.events.add(event)
+    # for anime in anime_year_list:
+    #     for (i, weekday) in enumerate(future_weekdays):
+    #         start_time = weekday
+    #         end_time = weekday + timedelta(minutes=duration) if duration_unit == 'min' else weekday + timedelta(seconds=duration)
+    #
+    #         event = Event()
+    #         event.name = title
+    #         event.begin = start_time.strftime("%Y-%m-%d %H:%M:%S")
+    #         event.end = end_time.strftime("%Y-%m-%d %H:%M:%S")
+    #
+    #         calendar.events.add(event)
 
     return calendar
